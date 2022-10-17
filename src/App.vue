@@ -1,28 +1,52 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Nav></Nav>
+    <Description></Description>
+    <Main></Main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Nav from './components/Nav.vue';
+import Main from './components/Main.vue';
+import Description from './components/Description.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Nav,
+    Main,
+    Description
+  },
+  methods: {
+  },
 }
 </script>
 
-<style>
+<style scoped>
+*,
+body,
+html {
+  -moz-user-select: none;
+  /*火狐*/
+  /*选中文字时避免出现蓝色背景*/
+  -webkit-user-select: none;
+  /*webkit浏览器*/
+  /*选中文字时避免出现蓝色背景*/
+  -ms-user-select: none;
+  /*IE10*/
+  /*选中文字时避免出现蓝色背景*/
+  user-select: none;
+  /*选中文字时避免出现蓝色背景*/
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 450px;
+  height: 650px;
+  margin: 0px auto;
+  background-color: #faf8ef;
+  border: 1px;
+  border-radius: 10px;
 }
 </style>
+
