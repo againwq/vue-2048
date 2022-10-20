@@ -31,9 +31,6 @@ export default {
     }
   },
   
-  beforeCreate() {
-    Game.GameInit()
-  },
   mounted() {
     document.addEventListener("keydown", (e) => {
       if (e.key == 'ArrowUp') {
@@ -54,6 +51,7 @@ export default {
       EventBus.$emit(EventType.scoreChange, changeScore)
       EventBus.$emit(EventType.addTile,addTilePosition)
       EventBus.$emit(EventType.mergeTile,mergeTile)
+      
     },
     keyDown() {
       let {changeScore,mergeTile} = Game.keyDown()

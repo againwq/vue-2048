@@ -5,7 +5,8 @@ const EventBus = new Vue()
 const EventType = {
    scoreChange: 'scoreChange',
    mergeTile:'mergeTile',
-   addTile:'addTile'
+   addTile:'addTile',
+   createNewGame:'createNewGame',
 }
 
 Object.freeze(EventType)

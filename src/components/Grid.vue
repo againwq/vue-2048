@@ -44,7 +44,6 @@ export default {
       }
     })
     EventBus.$on(EventType.mergeTile,(data) => {
-      console.log(data)
       data.forEach(tile => {
         if(this.position[0] == tile.position[0] && this.position[1] == tile.position[1]){
           this.isShow = true

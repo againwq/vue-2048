@@ -9,11 +9,13 @@
 </template>
 
 <script>
+import EventBus, { EventType } from '../event'
 import Game from '../store/Game'
 export default {
    name: "Description",
    methods:{
     restart(){
+      EventBus.$emit(EventType.createNewGame)
       Game.GameInit()
     }
    }

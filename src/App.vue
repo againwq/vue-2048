@@ -18,8 +18,7 @@ export default {
     Main,
     Description
   },
-  methods: {
-  },
+  
 }
 </script>
 

@@ -1,8 +1,8 @@
 import Tile from './Tile'
-import Grid from './Grids'
+import Grids from './Grids'
 export default {
     GameInit() {
-        Grid.GridsInit()
+        Grids.GridsInit()
         let Temp = new Array(2);
         let p = new Array(2);
         for (let time = 0; time < 2;) {
@@ -13,6 +13,13 @@ export default {
                 time++
             }
         }
+    },
+    GameReload(GridsStorage){
+        let GridsStorageArr = JSON.parse(GridsStorage)
+        for(let i = 0; i < Grids.Grids.length; i++){
+            Grids.Grids.splice(i,1,GridsStorageArr[i])
+        }
+        
     },
     keyUp() {
         let changeScore = 0

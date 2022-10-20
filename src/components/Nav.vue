@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import Game from '../store/Game'
+import Grids from '../store/Grids'
 import EventBus, { EventType } from '../event'
 export default {
     name: "Nav",
@@ -24,15 +26,46 @@ export default {
             bestScore: 0
         }
     },
+    created(){
+        Game.GameInit()
+        //this.score = parseInt(localStorage.getItem('score'))
+        //this.bestScore = parseInt(localStorage.getItem('bestScore'))
+        let GridsStorge = JSON.parse(JSON.stringify(localStorage.getItem('GridsStorge')))
+        if(GridsStorge) {Game.GameReload(GridsStorge); } 
+    },
     mounted(){
+        
         EventBus.$on(EventType.scoreChange,(data) => {
             this.score += data
         })
+        EventBus.$on(EventType.createNewGame,() => {
+            if(this.score >= this.bestScore){
+                this.bestScore = this.score
+                this.score = 0
+            }
+        })
+        window.addEventListener('beforeunload', e => this.beforeunloadFn(e))
     },
     methods: {
         refresh() {
             location.reload()
+        },
+        beforeunloadFn(e){
+            localStorage.removeItem('score')
+            localStorage.removeItem('bestScore')
+            localStorage.removeItem('GridsStorge')
+            localStorage.setItem('score', this.score)
+            localStorage.setItem('bestScore', this.bestScore)
+            let GridsStorgeArr = JSON.stringify(Grids.Grids)
+            localStorage.setItem('GridsStorge', GridsStorgeArr)
+            
         }
+    },
+    beforeDestroy(){
+        
+    },
+    destroyed(){
+        window.removeEventListener('beforeunload', e => this.beforeunloadFn(e))
     }
 }
 </script>
