@@ -26,20 +26,20 @@ export default {
             bestScore: 0
         }
     },
-    created(){
-        Game.GameInit()
-        //this.score = parseInt(localStorage.getItem('score'))
-        //this.bestScore = parseInt(localStorage.getItem('bestScore'))
+    created() {
+        this.score = JSON.parse(localStorage.getItem('score')) || 0
+        this.bestScore = JSON.parse(localStorage.getItem('bestScore')) || 0
         let GridsStorge = JSON.parse(JSON.stringify(localStorage.getItem('GridsStorge')))
-        if(GridsStorge) {Game.GameReload(GridsStorge); } 
+        if (GridsStorge) {Grids.GridsInit(); Game.GameReload(GridsStorge); }
+        else Game.GameInit()
     },
-    mounted(){
-        
-        EventBus.$on(EventType.scoreChange,(data) => {
+    mounted() {
+
+        EventBus.$on(EventType.scoreChange, (data) => {
             this.score += data
         })
-        EventBus.$on(EventType.createNewGame,() => {
-            if(this.score >= this.bestScore){
+        EventBus.$on(EventType.createNewGame, () => {
+            if (this.score >= this.bestScore) {
                 this.bestScore = this.score
                 this.score = 0
             }
@@ -50,7 +50,7 @@ export default {
         refresh() {
             location.reload()
         },
-        beforeunloadFn(e){
+        beforeunloadFn(e) {
             localStorage.removeItem('score')
             localStorage.removeItem('bestScore')
             localStorage.removeItem('GridsStorge')
@@ -58,15 +58,11 @@ export default {
             localStorage.setItem('bestScore', this.bestScore)
             let GridsStorgeArr = JSON.stringify(Grids.Grids)
             localStorage.setItem('GridsStorge', GridsStorgeArr)
-            
         }
     },
-    beforeDestroy(){
-        
-    },
-    destroyed(){
+    beforeDestroy() {
         window.removeEventListener('beforeunload', e => this.beforeunloadFn(e))
-    }
+    },
 }
 </script>
 
